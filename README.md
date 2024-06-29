@@ -8,3 +8,4 @@
 008 Fixing Prop Drilling With Composition (And Building a Layout)
 009 Using Composition to Make a Reusable Box
 010 Passing Elements as Props (Alternative to children)
+011 Building a Reusable Star Rating Component
