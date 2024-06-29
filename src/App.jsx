@@ -53,6 +53,8 @@ const average = (arr) =>
 // todo: App()
 export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
+  const [watched, setWatched] = useState(tempWatchedData);
+
   return (
     <>
       <NavBar>
@@ -61,10 +63,14 @@ export default function App() {
       </NavBar>
 
       <Main>
-        <ListBox>
+        <Box>
           <MovieList movies={movies} />
-        </ListBox>
-        <WatchedBox />
+        </Box>
+
+        <Box>
+          <WatchSummary watched={watched} />
+          <WatchedMovieList watched={watched} />
+        </Box>
       </Main>
     </>
   );
@@ -120,23 +126,45 @@ function Main({ children }) {
   return <main className="main">{children}</main>;
 }
 
-// todo ListBox()
-function ListBox({ children }) {
-  const [isOpen1, setIsOpen1] = useState(true);
+// todo Box()
+function Box({ children }) {
+  const [isOpen, setIsOpen] = useState(true);
+
+  return (
+    <div className="box">
+      <button className="btn-toggle" onClick={() => setIsOpen((open) => !open)}>
+        {isOpen ? "–" : "+"}
+      </button>
+
+      {isOpen && children}
+    </div>
+  );
+}
+
+/* 
+// todo WatchedBox()
+function WatchedBox() {
+  const [watched, setWatched] = useState(tempWatchedData);
+  const [isOpen2, setIsOpen2] = useState(true);
 
   return (
     <div className="box">
       <button
         className="btn-toggle"
-        onClick={() => setIsOpen1((open) => !open)}
+        onClick={() => setIsOpen2((open) => !open)}
       >
-        {isOpen1 ? "–" : "+"}
+        {isOpen2 ? "–" : "+"}
       </button>
 
-      {isOpen1 && children}
+      {isOpen2 && (
+        <>
+          <WatchSummary watched={watched} />
+          <WatchedMovieList watched={watched} />
+        </>
+      )}
     </div>
   );
-}
+} */
 
 // todo MovieList()
 function MovieList({ movies }) {
@@ -167,6 +195,7 @@ function Movie({ movie }) {
   );
 }
 
+/*
 // todo WatchedBox()
 function WatchedBox() {
   const [watched, setWatched] = useState(tempWatchedData);
@@ -190,6 +219,7 @@ function WatchedBox() {
     </div>
   );
 }
+*/
 
 // todo WatchSummary()
 function WatchSummary({ watched }) {
