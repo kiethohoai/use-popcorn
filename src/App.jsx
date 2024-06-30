@@ -34,34 +34,65 @@ export default function App() {
 
 // todo: TextExpander()
 function TextExpander({
+  children,
   collapsedNumWords = 10,
   expandButtonText = "Show more",
   collapseButtonText = "Show less",
-  buttonColor = "#1f09cd",
+  buttonColor = "blue",
   expanded = false,
-  className,
-  children,
+  className = "",
 }) {
+  // todo:
   const [isExpanded, setIsExpanded] = useState(expanded);
-  const displayText = isExpanded
-    ? children
-    : children.split(" ").slice(0, collapsedNumWords).join(" ") + "...";
 
-  const buttonStyle = {
-    background: "none",
-    border: "none",
-    font: "inherit",
-    cursor: "pointer",
-    marginLeft: "6px",
+  const buttonSytle = {
+    //todo:
     color: buttonColor,
+    border: "none",
+    background: "none ",
+    font: "inherit",
+    marginLeft: "4px",
   };
 
   return (
     <div className={className}>
-      <span>{displayText}</span>
-      <button onClick={() => setIsExpanded((exp) => !exp)} style={buttonStyle}>
+      {isExpanded ? children : children.split(" ").slice(0, collapsedNumWords).join(" ") + "..."}
+      <button style={buttonSytle} onClick={() => setIsExpanded((exp) => !exp)}>
         {isExpanded ? collapseButtonText : expandButtonText}
       </button>
     </div>
   );
 }
+
+// function TextExpander({
+//   collapsedNumWords = 10,
+//   expandButtonText = "Show more",
+//   collapseButtonText = "Show less",
+//   buttonColor = "#1f09cd",
+//   expanded = false,
+//   className,
+//   children,
+// }) {
+//   const [isExpanded, setIsExpanded] = useState(expanded);
+//   const displayText = isExpanded
+//     ? children
+//     : children.split(" ").slice(0, collapsedNumWords).join(" ") + "...";
+
+//   const buttonStyle = {
+//     background: "none",
+//     border: "none",
+//     font: "inherit",
+//     cursor: "pointer",
+//     marginLeft: "6px",
+//     color: buttonColor,
+//   };
+
+//   return (
+//     <div className={className}>
+//       <span>{displayText}</span>
+//       <button onClick={() => setIsExpanded((exp) => !exp)} style={buttonStyle}>
+//         {isExpanded ? collapseButtonText : expandButtonText}
+//       </button>
+//     </div>
+//   );
+// }
