@@ -14,3 +14,4 @@
 014 Props as a Component API
 015 Improving Reusability With Props
 016 PropTypes
+017 CHALLENGE #1 Text Expander Component
