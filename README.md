@@ -20,3 +20,4 @@
 ###12 - Effects and Data Fetching - 12###
 001 Section Overview
 002 The Component Lifecycle
+003 How NOT to Fetch Data in React

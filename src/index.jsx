@@ -12,7 +12,6 @@ root.render(
 
 // todo #2 Star Rating
 // import StarRating from "./StarRating";
-
 /* function Test() {
   const [movieRating, setMovieRating] = useState(0);
 
