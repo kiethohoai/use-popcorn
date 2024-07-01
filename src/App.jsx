@@ -59,8 +59,16 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const KEY = "6d431fb9";
-  const tempQuery = "interstellar";
-  const [query, setQuery] = useState(tempQuery);
+  const [query, setQuery] = useState("interstellar");
+  const [selectedId, setSelectedId] = useState(null);
+
+  function handleSelectMovie(id) {
+    setSelectedId((selectedId) => (id === selectedId ? null : id));
+  }
+
+  function handleCloseMovie() {
+    setSelectedId(null);
+  }
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -102,15 +110,25 @@ export default function App() {
 
       <Main>
         <Box>
-          {/* {isLoading ? <Loader /> : <MovieList movies={movies} />} */}
           {isLoading && <Loader />}
-          {!isLoading && !error && <MovieList movies={movies} />}
+          {!isLoading && !error && (
+            <MovieList movies={movies} onSelectMovie={handleSelectMovie} />
+          )}
           {error && <ErrorMessage message={error} />}
         </Box>
 
         <Box>
-          <WatchSummary watched={watched} />
-          <WatchedMovieList watched={watched} />
+          {selectedId ? (
+            <MovieDetail
+              selectedId={selectedId}
+              onCloseMovie={handleCloseMovie}
+            />
+          ) : (
+            <>
+              <WatchSummary watched={watched} />
+              <WatchedMovieList watched={watched} />
+            </>
+          )}
         </Box>
       </Main>
     </>
@@ -220,22 +238,22 @@ function WatchedBox() {
 } */
 
 // todo MovieList()
-function MovieList({ movies }) {
+function MovieList({ movies, onSelectMovie }) {
   // const [movies, setMovies] = useState(tempMovieData);
 
   return (
-    <ul className="list">
+    <ul className="list list-movies">
       {movies?.map((movie, i) => (
-        <Movie key={movie.imdbID} movie={movie} />
+        <Movie key={movie.imdbID} movie={movie} onSelectMovie={onSelectMovie} />
       ))}
     </ul>
   );
 }
 
 // todo Movie()
-function Movie({ movie }) {
+function Movie({ movie, onSelectMovie }) {
   return (
-    <li>
+    <li onClick={() => onSelectMovie(movie.imdbID)}>
       <img src={movie.Poster} alt={`${movie.Title} poster`} />
       <h3>{movie.Title}</h3>
       <div>
@@ -248,31 +266,17 @@ function Movie({ movie }) {
   );
 }
 
-/*
-// todo WatchedBox()
-function WatchedBox() {
-  const [watched, setWatched] = useState(tempWatchedData);
-  const [isOpen2, setIsOpen2] = useState(true);
-
+// todo MovieDetail()
+function MovieDetail({ selectedId, onCloseMovie }) {
   return (
-    <div className="box">
-      <button
-        className="btn-toggle"
-        onClick={() => setIsOpen2((open) => !open)}
-      >
-        {isOpen2 ? "–" : "+"}
+    <div className="details">
+      <button onClick={onCloseMovie} className="btn-back">
+        &larr;
       </button>
-
-      {isOpen2 && (
-        <>
-          <WatchSummary watched={watched} />
-          <WatchedMovieList watched={watched} />
-        </>
-      )}
+      {selectedId}
     </div>
   );
 }
-*/
 
 // todo WatchSummary()
 function WatchSummary({ watched }) {
