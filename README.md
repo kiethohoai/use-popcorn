@@ -16,3 +16,6 @@
 016 PropTypes
 017 CHALLENGE #1 Text Expander Component
 018 CHALLENGE #2 Text Expander Component - Do It By Myself
+
+###12 - Effects and Data Fetching - 12###
+001 Section Overview
