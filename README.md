@@ -21,3 +21,5 @@
 001 Section Overview
 002 The Component Lifecycle
 003 How NOT to Fetch Data in React
+004 useEffect to the Rescue
+005 A First Look at Effects
