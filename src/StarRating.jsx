@@ -12,13 +12,13 @@ const starContainerStyle = {
 
 // todo StarRating()
 export default function StarRating({
-  maxRating = 5,
+  maxRating = 10,
   color = "#fcc419",
-  size = 48,
+  size = 28,
   className = "",
   message = [],
   defaultRating = 0,
-  onSetRating,
+  onSetRating = function () {},
 }) {
   const [rating, setRating] = useState(defaultRating);
   const [tempRating, setTempRating] = useState(0);
