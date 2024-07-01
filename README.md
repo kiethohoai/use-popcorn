@@ -19,3 +19,4 @@
 
 ###12 - Effects and Data Fetching - 12###
 001 Section Overview
+002 The Component Lifecycle
