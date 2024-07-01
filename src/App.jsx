@@ -57,21 +57,33 @@ export default function App() {
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const KEY = "6d431fb9";
   const query = "interstellar";
 
   useEffect(() => {
     const fetchMovie = async () => {
-      setIsLoading(true);
-      const res = await fetch(
-        `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`,
-      );
-      const data = await res.json();
-      console.log("🚀CHECK  data =", data);
-      setMovies(data.Search);
-      console.log("🚀CHECK  movies =", movies);
-      setIsLoading(false);
+      try {
+        setIsLoading(true);
+        const res = await fetch(
+          `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`,
+        );
+
+        if (!res.ok) throw Error("Something went wrong while fetching movies!");
+
+        const data = await res.json();
+        if (data.Response === false) {
+          throw new Error("Movie not found!");
+        }
+
+        setMovies(data.Search);
+      } catch (err) {
+        console.error("🚀CHECK  err =", err.message);
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchMovie();
   }, []);
@@ -84,7 +96,12 @@ export default function App() {
       </NavBar>
 
       <Main>
-        <Box>{isLoading ? <Loader /> : <MovieList movies={movies} />}</Box>
+        <Box>
+          {/* {isLoading ? <Loader /> : <MovieList movies={movies} />} */}
+          {isLoading && <Loader />}
+          {!isLoading && !error && <MovieList movies={movies} />}
+          {error && <ErrorMessage message={error} />}
+        </Box>
 
         <Box>
           <WatchSummary watched={watched} />
@@ -97,6 +114,14 @@ export default function App() {
 
 function Loader() {
   return <p className="loader">Loading...</p>;
+}
+
+function ErrorMessage({ message }) {
+  return (
+    <p className="error">
+      <span>😓</span> {message}
+    </p>
+  );
 }
 
 // todo: NavBar()
