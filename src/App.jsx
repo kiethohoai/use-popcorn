@@ -214,7 +214,6 @@ function Main({ children }) {
 
 // todo Box()
 function Box({ children }) {
-  // console.log("🚀CHECK  children =", children);
   const [isOpen, setIsOpen] = useState(true);
 
   return (
@@ -333,6 +332,11 @@ function MovieDetail({ selectedId, onCloseMovie, KEY, onAddWatched, watched }) {
     }
     getMovieDetail();
   }, [selectedId]);
+
+  // todo: change Page Title while clicking on movie item
+  useEffect(() => {
+    document.title = `Movie | ${title}`;
+  }, [title]);
 
   return (
     <div className="details">

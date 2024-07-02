@@ -31,3 +31,4 @@
 011 Selecting a Movie
 012 Loading Movie Details
 013 Adding a Watched Movie
+014 Adding a New Effect Changing Page Title
