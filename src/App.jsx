@@ -80,12 +80,15 @@ export default function App() {
   }
 
   useEffect(() => {
+    const controller = new AbortController();
+
     const fetchMovie = async () => {
       try {
         setIsLoading(true);
         setError("");
         const res = await fetch(
           `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`,
+          { signal: controller.signal },
         );
 
         if (!res.ok) throw Error("Something went wrong while fetching movies!");
@@ -95,8 +98,12 @@ export default function App() {
           throw new Error("Movie not found!");
         }
         setMovies(data.Search);
+        setError("");
       } catch (err) {
-        setError(err.message);
+        if (err.name !== "AbortError") {
+          setError(err.message);
+        }
+        // setError(err.message);
       } finally {
         setIsLoading(false);
       }
@@ -108,6 +115,10 @@ export default function App() {
       return;
     }
     fetchMovie();
+
+    return function () {
+      controller.abort();
+    };
   }, [query]);
 
   return (
@@ -333,9 +344,14 @@ function MovieDetail({ selectedId, onCloseMovie, KEY, onAddWatched, watched }) {
     getMovieDetail();
   }, [selectedId]);
 
-  // todo: change Page Title while clicking on movie item
   useEffect(() => {
     document.title = `Movie | ${title}`;
+
+    // todo: clean up function
+    return function () {
+      document.title = `usePopcorn`;
+      console.log(`Clean up effect for movie ${title}`);
+    };
   }, [title]);
 
   return (
