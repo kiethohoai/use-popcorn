@@ -60,7 +60,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const KEY = "6d431fb9";
-  const [query, setQuery] = useState("interstellar");
+  const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState(null);
 
   function handleSelectMovie(id) {
@@ -114,6 +114,8 @@ export default function App() {
       setError("");
       return;
     }
+
+    handleCloseMovie();
     fetchMovie();
 
     return function () {
@@ -331,6 +333,24 @@ function MovieDetail({ selectedId, onCloseMovie, KEY, onAddWatched, watched }) {
     onCloseMovie();
   }
 
+  useEffect(
+    function () {
+      function callback(e) {
+        if (e.code === "Escape") {
+          onCloseMovie();
+          // console.log("CLOSING!");
+        }
+      }
+
+      document.addEventListener("keydown", callback);
+
+      return function () {
+        document.removeEventListener("keydown", callback);
+      };
+    },
+    [onCloseMovie],
+  );
+
   useEffect(() => {
     async function getMovieDetail() {
       setIsLoading(true);
@@ -347,10 +367,8 @@ function MovieDetail({ selectedId, onCloseMovie, KEY, onAddWatched, watched }) {
   useEffect(() => {
     document.title = `Movie | ${title}`;
 
-    // todo: clean up function
     return function () {
       document.title = `usePopcorn`;
-      console.log(`Clean up effect for movie ${title}`);
     };
   }, [title]);
 
