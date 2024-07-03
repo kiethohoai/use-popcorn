@@ -33,5 +33,19 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "@eslint/compat": "^1.1.0",
+    "@eslint/js": "^9.6.0",
+    "eslint": "^9.6.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "eslint-plugin-react": "^7.34.3",
+    "globals": "^15.8.0"
+  },
+  "description": "001 Section Overview\r 002 Setting Up the usePopcorn Project\r 003 How to Split a UI Into Components\r 004 Splitting Components in Practice\r 005 Component Categories\r 006 Prop Drilling\r 007 Component Composition\r 008 Fixing Prop Drilling With Composition (And Building a Layout)\r 009 Using Composition to Make a Reusable Box\r 010 Passing Elements as Props (Alternative to children)\r 011 Building a Reusable Star Rating Component\r 012 Creating the Stars\r 013 Handling Hover Events\r 014 Props as a Component API\r 015 Improving Reusability With Props\r 016 PropTypes\r 017 CHALLENGE #1 Text Expander Component\r 018 CHALLENGE #2 Text Expander Component - Do It By Myself",
+  "main": "vite.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
