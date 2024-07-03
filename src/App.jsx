@@ -13,7 +13,6 @@ export default function App() {
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState(null);
 
-  // fixme: current task here
   // const [watched, setWatched] = useState([]);
   const [watched, setWatched] = useState(function () {
     const storeValue = localStorage.getItem("watched");
@@ -28,7 +27,6 @@ export default function App() {
     setSelectedId(null);
   }
 
-  // fixme:
   function handleAddWatched(movie) {
     setWatched((watched) => [...watched, movie]);
     // localStorage.setItem("watched", JSON.stringify([...watched, movie]));
@@ -38,7 +36,6 @@ export default function App() {
     setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
   }
 
-  // fixme
   useEffect(
     function () {
       localStorage.setItem("watched", JSON.stringify(watched));
@@ -165,7 +162,16 @@ function Logo() {
 
 // todo: Search()
 function Search({ query, setQuery }) {
-  // const [query, setQuery] = useState("");
+  // fixme Task here
+  useEffect(
+    function () {
+      const el = document.querySelector(".search");
+      console.log("🚀CHECK  el =", el);
+      el.focus();
+    },
+    [query],
+  );
+
   return (
     <input
       className="search"
