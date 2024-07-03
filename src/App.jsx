@@ -11,7 +11,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const KEY = "6d431fb9";
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState("interstellar");
   const [selectedId, setSelectedId] = useState(null);
 
   function handleSelectMovie(id) {
@@ -269,6 +269,19 @@ function MovieDetail({ selectedId, onCloseMovie, KEY, onAddWatched, watched }) {
     Plot: plot,
   } = movie;
 
+  /*   const [isTop, setIsTop] = useState(imdbRating > 8);
+  console.log("🚀CHECK  isTop =", isTop);
+  useEffect(
+    function () {
+      //todo
+      setIsTop(imdbRating > 5);
+    },
+    [imdbRating],
+  ); */
+
+  /*   const isTop = imdbRating > 5;
+  console.log("🚀CHECK  isTop =", isTop); */
+
   useEffect(
     function () {
       function callback(e) {
@@ -346,6 +359,7 @@ function MovieDetail({ selectedId, onCloseMovie, KEY, onAddWatched, watched }) {
               </p>
             </div>
           </header>
+
           <section>
             <div className="rating">
               {/* todo StarRating */}
