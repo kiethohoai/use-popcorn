@@ -284,6 +284,8 @@ function MovieDetail({ selectedId, onCloseMovie, KEY, onAddWatched, watched }) {
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState(0);
 
+  const countRef = useRef(0);
+
   const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
   const watchedUserRating = watched.find(
     (movie) => movie.imdbID === selectedId,
@@ -302,18 +304,15 @@ function MovieDetail({ selectedId, onCloseMovie, KEY, onAddWatched, watched }) {
     Plot: plot,
   } = movie;
 
-  /*   const [isTop, setIsTop] = useState(imdbRating > 8);
-  console.log("🚀CHECK  isTop =", isTop);
   useEffect(
     function () {
       //todo
-      setIsTop(imdbRating > 5);
+      if (userRating) {
+        countRef.current = countRef.current + 1;
+      }
     },
-    [imdbRating],
-  ); */
-
-  /*   const isTop = imdbRating > 5;
-  console.log("🚀CHECK  isTop =", isTop); */
+    [userRating],
+  );
 
   useEffect(
     function () {
@@ -363,6 +362,7 @@ function MovieDetail({ selectedId, onCloseMovie, KEY, onAddWatched, watched }) {
       imdbRating: +imdbRating,
       runtime: +runtime.split(" ").at(0),
       userRating,
+      countRatingDecisions: countRef.current,
     };
 
     onAddWatched(newWatchedMovie);
