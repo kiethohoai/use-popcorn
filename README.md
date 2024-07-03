@@ -41,7 +41,6 @@
 #13 - 001 Section Overview
 #13 - 002 React Hooks and Their Rules
 #13 - 003 The Rules of Hooks in Practice
-#13 - 
-#13 - 
-#13 - 
-#13 - 
+#13 - 004 More Details of useState
+#13 - 005 Initializing State With a Callback (Lazy Initial State)
+#13 - 006 useState Summary
