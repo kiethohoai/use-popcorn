@@ -37,5 +37,11 @@
 017 Cleaning Up Data Fetching
 018 One More Effect Listening to a Keypress
 
-13 - Custom Hooks, Refs, and More State
-001 Section Overview
+#13 - Custom Hooks, Refs, and More State
+#13 - 001 Section Overview
+#13 - 002 React Hooks and Their Rules
+#13 - 
+#13 - 
+#13 - 
+#13 - 
+#13 - 
