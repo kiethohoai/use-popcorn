@@ -3,7 +3,6 @@ import StarRating from "./StarRating";
 import { useMovies } from "./useMovies";
 import { useLocalStorageState } from "./useLocalStorageState";
 import React from "react";
-import { useKey } from "./useKey";
 
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr?.length, 0);
@@ -114,14 +113,7 @@ function Logo() {
 function Search({ query, setQuery }) {
   const inputEl = useRef(null);
 
-  // todo useKey() custom hook
-  useKey("Enter", function () {
-    if (document.activeElement === inputEl.current) return;
-    inputEl.current.focus();
-    setQuery("");
-  });
-
-  /*   useEffect(function () {
+  useEffect(function () {
     function callback(e) {
       if (document.activeElement === inputEl.current) {
         return;
@@ -137,7 +129,7 @@ function Search({ query, setQuery }) {
     return () => {
       document.removeEventListener("keydown", callback);
     };
-  }, []); */
+  }, []);
 
   return (
     <input
@@ -246,10 +238,7 @@ function MovieDetail({ selectedId, onCloseMovie, KEY, onAddWatched, watched }) {
     [userRating],
   );
 
-  // todo useKey() custom hook
-  useKey("Escape", onCloseMovie);
-
-  /*  useEffect(
+  useEffect(
     function () {
       function callback(e) {
         if (e.code === "Escape") {
@@ -264,7 +253,7 @@ function MovieDetail({ selectedId, onCloseMovie, KEY, onAddWatched, watched }) {
       };
     },
     [onCloseMovie],
-  ); */
+  );
 
   useEffect(() => {
     async function getMovieDetail() {
